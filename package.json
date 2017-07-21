@@ -1,0 +1,31 @@
+{
+  "name": "news-scraper",
+  "version": "1.0.0",
+  "description": "news-scraper",
+  "main": "server.js",
+  "scripts": {
+    "test": "news",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crazyceelo/news-scraper.git"
+  },
+  "keywords": [
+    "news"
+  ],
+  "author": "Carlos Perez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crazyceelo/news-scraper/issues"
+  },
+  "homepage": "https://github.com/crazyceelo/news-scraper#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.15.3",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^4.11.3",
+    "request": "^2.81.0"
+  }
+}
