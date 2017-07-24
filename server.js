@@ -6,6 +6,10 @@ var mongoose = require("mongoose");
 var override = require("method-override");
 var path = require("path");
 
+// set up express and port
+var app = express();
+var PORT = process.env.PORT || 3000;
+
 // require Note.js and Article.js models
 var Note = require("./models/Note.js");
 var Article = require("./models/Article.js");
