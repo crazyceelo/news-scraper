@@ -2,19 +2,26 @@
     <div class="container">
         <div class="row">
             <div class="col-md-1">
-                <input class="btn btn-default navbar-btn" type="button" value="Scrape it">
+                <input id="scrape-button" class="btn btn-default navbar-btn" type="button" value="Scrape it">
             </div>
             <div class="col-md-2">
-                <input class="btn btn-default navbar-btn" type="button" value="Display News">
+                <input id="display-button" class="btn btn-default navbar-btn" type="button" value="Display News">
             </div>
         </div>
     </div>
 </nav>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1>TEST</h1>
+<body>
+    <div class="container">
+        <div class="row">
+            {{#each articles}}
+            <div class="col-md-12">
+                <a href={{this.link}} target="_blank" ><h1 id="articles">{{this.title}}</h1></a>
+            </div>
+            {{>form}}
+            {{/each}}
         </div>
     </div>
-</div>
+    <script src="../assets/js/app.js"></script>
+</body>
+
