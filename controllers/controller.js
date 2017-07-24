@@ -1,29 +1,41 @@
-var request = require("request");
-var cheerio = require("cheerio");
+// Create the router
+// import express and set up router function
+var express = require("express");
+var router = express.Router();
+
+router.get("/", function(req, res){
+    res.render("index");
+})
+
+module.exports = router;
 
 
-module.exports = (req, res)=>{
-    app.get("/scrape", function(req, res){
-        request("https://www.mmafighting.com/", function(error, response, html){
-          var $ = cheerio.load(html);
-          $("").each(function(i, element){
-              var result = {};
+// var request = require("request");
+// var cheerio = require("cheerio");
 
-              result.title = $(this).children("a").text();
-              result.link = $(this).children("a").attr("href");
 
-              var entry = new Article(result);
+// module.exports = (req, res)=>{
+//     app.get("/scrape", function(req, res){
+//         request("https://www.mmafighting.com/", function(error, response, html){
+//           var $ = cheerio.load(html);
+//           $("").each(function(i, element){
+//               var result = {};
 
-              entry.save(function(err, doc){
-                  if(err){
-                      console.log(err);
-                  }
-                  else{
-                      console.log(doc);
-                  }
-              })
-          })  
-        })
-        res.send("scrape complete");
-    })
-}
+//               result.title = $(this).children("a").text();
+//               result.link = $(this).children("a").attr("href");
+
+//               var entry = new Article(result);
+
+//               entry.save(function(err, doc){
+//                   if(err){
+//                       console.log(err);
+//                   }
+//                   else{
+//                       console.log(doc);
+//                   }
+//               })
+//           })  
+//         })
+//         res.send("scrape complete");
+//     })
+// }

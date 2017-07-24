@@ -3,6 +3,8 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
+var override = require("method-override");
+var path = require("path");
 
 // require Note.js and Article.js models
 var Note = require("./models/Note.js");
@@ -21,6 +23,17 @@ app.use(bodyParser.urlencoded({
 }));
 
 // Make public a static dir
+app.use(express.static("public"));
+
+// Override with POST having ?_method=DELETE in handlebars file
+app.use(override("_method"));
+
+// import handlebars to use the main file
+var handle = require("express-handlebars");
+app.engine("handlebars", handle({defaultLayout: "main"}));
+app.set("view engine", "handlebars");
+
+// Database configuration with mongoose
 mongoose.connect("mongodb://localhost/data");
 var db = mongoose.connection;
 
@@ -33,6 +46,13 @@ db.on("error", function(error){
 db.once("open", function(){
     console.log("Mongoose connection successfull");
 });
+
+// Import the controller and give the server access to controller
+var routes = require("./controllers/controller.js");
+app.use("/", routes);
+app.listen(PORT);
+
+
 
 
 app.listen(3000, function(){
