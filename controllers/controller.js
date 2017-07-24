@@ -10,7 +10,7 @@ module.exports = (req, res)=>{
               var result = {};
 
               result.title = $(this).children("a").text();
-              result.body = $(this).children("a").text();
+              result.link = $(this).children("a").attr("href");
 
               var entry = new Article(result);
 
