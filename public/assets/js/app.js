@@ -7,5 +7,7 @@ $("#display-button").on("click", function(data){
 })
 
 $("#save-button").on("click", function(){
-    window.location.href = "http://localhost:3000/articles:id";
+    // $("#notes-field").empty();
+    var thisId = $(this).attr("data-id");
+    window.location.href = "http://localhost:3000/articles/" + thisId;
 })

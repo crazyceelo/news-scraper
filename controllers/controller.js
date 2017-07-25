@@ -2,10 +2,16 @@
 // import express and set up router function
 var express = require("express");
 var router = express.Router();
+var bodyParser = require('body-parser');
+var app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 router.get("/", function(req, res){
     res.render("index");
 })
+
+
 
 module.exports = router;
 
@@ -37,11 +43,11 @@ router.get("/scrape", function(req, res){
         })  
     })
     res.send("scrape complete");
-    res.redirect("/");
 })
 
 router.get("/articles", function(req, res){
     Article.find({}, function(error, data){
+        console.log(data);
         if(error){
             res.json(error)
         }
@@ -51,23 +57,42 @@ router.get("/articles", function(req, res){
     })
 })
 
-router.post("/articles:id", function(req, res){
-    var newNote = new Note(req.body);
+// router.post("/articles/:id", function(req, res){
+//     console.log(req.body);
+// })
 
-    newNote.save(function(error, doc){
-        if(error){
-            console.log(error);
+// Create a new note or replace an existing note
+router.post("/articles/:id", function(req, res) {
+  // Create a new note and pass the req.body to the entry
+  var newNote = new Note(req.body);
+
+  // And save the new note the db
+  newNote.save(function(error, doc) {
+    // Log any errors
+    if (error) {
+      console.log(error);
+    }
+    // Otherwise
+    else {
+      // Use the article id to find and update it's note
+      Article.findOneAndUpdate({ "_id": req.params.id }, { "note": doc._id })
+      // Execute the above query
+      .populate("note")
+      .exec(function(err, doc) {
+        // Log any errors
+        if (err) {
+          console.log(err);
         }
-        else{
-            Article.findOneAndUpdate({}, {"_id": doc.params._id}, {"note": doc._id}).exec(function(err, doc){
-                if (err){
-                    console.log(err);
-                }
-                else{
-                    res.json(doc);
-                    // res.render("index", {"notes": doc});
-                }
-            })
+        else {
+          // Or send the document to the browser
+          res.json(doc);
+            // console.log(doc.notes);
+            // res.render("/articles", doc);
+            // res.redirect({"notes": doc}, "/articles");
+            // res.redirect("/articles", {"notes": doc});
+            // res.redirect("/articles");
         }
-    })
-})
+      });
+    }
+  });
+});
