@@ -1,8 +1,8 @@
 <form action='/articles/{{this._id}}' method='POST' id="notes-form">
     <div class="row">
         <div class="col-md-12">     
-            <input value='{{#each notes}}{{this.title}}{{/each}}' id="title-field" name="title" type="text" class="form-control" placeholder="title of comment">
-            <textarea value=''  id="notes-field" name="body" class="form-control" rows="3" placeholder="enter comment"></textarea>
+            <input value='{{this.note.title}}' id="title-field" name="title" type="text" class="form-control" placeholder="title of comment">
+            <input value='{{this.note.body}}'  id="notes-field" name="body" class="form-control" rows="3" placeholder="enter comment"></textarea>
         </div>
     </div>
     <div class="row">
@@ -10,7 +10,7 @@
             <input id="save-button" data-id={{this._id}} class="btn btn-default navbar-btn" type="submit" value="Save" >
         </div>
         <div class="col-md-2">
-            <input id="delete-button" class="btn btn-default navbar-btn" type="button" value="Delete">
+            <input id="delete-button" data-id={{this._id}} class="btn btn-default navbar-btn" type="button" value="Delete">
         </div>
     </div>
 </form>

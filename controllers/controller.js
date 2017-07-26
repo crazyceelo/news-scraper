@@ -46,7 +46,9 @@ router.get("/scrape", function(req, res){
 })
 
 router.get("/articles", function(req, res){
-    Article.find({}, function(error, data){
+    Article.find({})
+    .populate("note")
+    .exec(function(error, data) {
         console.log(data);
         if(error){
             res.json(error)
@@ -79,19 +81,19 @@ router.post("/articles/:id", function(req, res) {
       // Execute the above query
       .populate("note")
       .exec(function(err, doc) {
-        // Log any errors
-        if (err) {
-          console.log(err);
-        }
-        else {
-          // Or send the document to the browser
+        // // Log any errors
+        // if (err) {
+        //   console.log(err);
+        // }
+        // else {
+        //   // Or send the document to the browser
           res.json(doc);
-            // console.log(doc.notes);
-            // res.render("/articles", doc);
-            // res.redirect({"notes": doc}, "/articles");
-            // res.redirect("/articles", {"notes": doc});
-            // res.redirect("/articles");
-        }
+        //     // console.log(doc.notes);
+        //     // res.render("/articles", doc);
+        //     // res.redirect({"notes": doc}, "/articles");
+        //     // res.redirect("/articles", {"notes": doc});
+        //     // res.redirect("/articles");
+        // }
       });
     }
   });
