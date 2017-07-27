@@ -87,7 +87,7 @@ router.post("/articles/:id", function(req, res) {
         // }
         // else {
         //   // Or send the document to the browser
-          res.json(doc);
+        //   res.json(doc);
         //     // console.log(doc.notes);
         //     // res.render("/articles", doc);
         //     // res.redirect({"notes": doc}, "/articles");
@@ -98,3 +98,9 @@ router.post("/articles/:id", function(req, res) {
     }
   });
 });
+
+router.delete("/articles/:id", function(req, res){
+    Note.remove({
+        "_id": req.params.id
+    })
+})

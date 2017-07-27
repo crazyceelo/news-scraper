@@ -9,8 +9,10 @@
         <div class="col-md-1">
             <input id="save-button" data-id={{this._id}} class="btn btn-default navbar-btn" type="submit" value="Save" >
         </div>
-        <div class="col-md-2">
-            <input id="delete-button" data-id={{this._id}} class="btn btn-default navbar-btn" type="button" value="Delete">
-        </div>
+        <form action="/articles/{{this.note._id}}?_method=DELETE" method="POST" id="delete-note-button"></form>
+            <div class="col-md-2">
+                <input id="delete-button" data-id={{this._id}} class="btn btn-default navbar-btn" type="button" value="Delete">
+            </div>
+        </form>
     </div>
 </form>

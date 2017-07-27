@@ -11,3 +11,8 @@ $("#save-button").on("click", function(){
     var thisId = $(this).attr("data-id");
     window.location.href = "http://localhost:3000/articles/" + thisId;
 })
+
+$("#delete-button").on("click", function(){
+    var noteId = $(this).attr("data-id");
+    window.location.href = "http://localhost:3000/articles/" + noteId;
+})
